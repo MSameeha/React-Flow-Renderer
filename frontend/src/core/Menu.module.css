@@ -1,0 +1,12 @@
+.nav{
+    background-color:rgba(5, 0, 255, 0.4);
+    height: 80px;
+    border: none;
+    
+}
+.signout{
+    color:black;
+}
+.signout:hover{
+    background-color: #131D5A; border-radius: 30px;color:white
+}
