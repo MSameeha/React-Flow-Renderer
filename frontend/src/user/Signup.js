@@ -101,11 +101,11 @@ const Signup = () => {
             return <Redirect to="/" />
         }
     }
-    return (<div><Menu>  </Menu>
+    return (<div style={{ backgroundColor: 'rgba(5, 0, 255, 0.65)' }}><Menu>  </Menu>
         <div style={{
             width: '100%',
             height: '100%',
-            backgroundColor: 'rgba(5, 0, 255, 0.4)',
+            // backgroundColor: 'rgba(5, 0, 255, 0.4)',
             display: 'flex',
             flexWrap: 'wrap'
         }}>

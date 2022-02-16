@@ -3,7 +3,7 @@ import { Handle } from "react-flow-renderer";
 import './diamond.css'
 const RectangleNode = ({ data }) => {
   return (
-    <div style={{ background: "#9ca8b3", padding: "1rem" }}>
+    <div style={{ background: "yellow", padding: "1rem",border:"2px solid black" }}>
       <Handle
         type="target"
         position="top"
@@ -24,8 +24,8 @@ const RectangleNode = ({ data }) => {
 const ParaNode = ({ data }) => {
   return (
     <div style={{
-      background: "#9ca8b3", padding: "1rem",
-      transform: "skew(155deg)"
+      background: "lightBlue", padding: "1rem",
+      transform: "skew(155deg)",border:"2px solid black"
     }}>
       <Handle
         type="target"
@@ -47,14 +47,14 @@ const ParaNode = ({ data }) => {
 const DiamondNode = ({ data }) => {
   return (
     <div style={{
-      background: '#9ca8b3',
+      background: 'orange',
       transform: 'rotate(45deg)',
       minWidth: '100px',
       minHeight: '100px',
       width: '60%',
       height: '60%',
       textAlign: 'left'
-
+      ,border:"2px solid black"
     }}>
 
 
@@ -87,7 +87,7 @@ const StartNode = ({ data }) => {
   return (
     <div
       style={{
-        background: "#9ca8b3", padding: "1rem", borderRadius: '50%'
+        background: "lightGreen", padding: "1rem", borderRadius: '50%',border:"2px solid black"
       }}
     >
       <div id={data.id}>{data.label}</div>
@@ -105,7 +105,7 @@ const EndNode = ({ data }) => {
   return (
     <div
       style={{
-        background: "#9ca8b3", padding: "1rem", borderRadius: '50%'
+        background: "lightGreen", padding: "1rem", borderRadius: '50%',border:"2px solid black"
       }}
     >
       <Handle

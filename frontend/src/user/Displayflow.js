@@ -3,9 +3,7 @@
 import { useStopwatch } from 'react-timer-hook';
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import Menu from "../core/Menu";
-import Popup from 'reactjs-popup';
-import 'reactjs-popup/dist/index.css';
+import Menu from "../core/Menu"
 import ReactFlow, {
     removeElements,
     updateEdge,
@@ -15,10 +13,7 @@ import ReactFlow, {
     Controls
 } from "react-flow-renderer";
 import { nodeTypes } from "../react-flow-renderer/Nodes";
-import { getFlow, sendTimeData } from './apiHelper';
-
-import classes from './Displayflow.css'
-
+import { getFlow, sendTimeData } from './apiHelper'
 const Displayflow = (props) => {
     const [elements, setElements] = useState([]);
     const [answer, setAnswer] = useState([]);
@@ -28,15 +23,15 @@ const Displayflow = (props) => {
     const [clicked, setClicked] = useState(false)
     const [newName, setNewName] = useState("");
     const [instance, setInstance] = useState();
-    const [time,setTime] = useState(1000)
-    const [data,setData] = useState(false)
-    const [button,setButton] = useState(false)
-    const [penal,setPenal]  = useState(0)
-    const [leader,setLeader]  = useState([])
+    const [time, setTime] = useState(1000)
+    const [data, setData] = useState(false)
+    const [button, setButton] = useState(false)
+    const [penal, setPenal] = useState(0)
+    const [leader, setLeader] = useState([])
     const {
         seconds,
         minutes,
-      } = useStopwatch({ autoStart: true });
+    } = useStopwatch({ autoStart: true });
 
     useEffect(() => {
         console.log(props.elements)
@@ -87,14 +82,14 @@ const Displayflow = (props) => {
                     let y = []
                     let q = []
                     for (let i of x) {
-                        if (i.hasOwnProperty("position") ) {
+                        if (i.hasOwnProperty("position")) {
                             y.push(i)
                         }
-                        else if(i["flg"] === 1){
+                        else if (i["flg"] === 1) {
                             console.log(i)
                             q = elements
                             q.push(i)
-                            
+
                         }
                         else {
                             let p = arr
@@ -106,12 +101,12 @@ const Displayflow = (props) => {
                     y = shuffle(y)
                     let z = 0
                     for (let i of y) {
-                        
+
                         i["position"]["x"] = 0
                         i["position"]["y"] = 100 * z
                         z++;
                     }
-                    for(let i=0;i<q.length;i++){
+                    for (let i = 0; i < q.length; i++) {
                         y.push(q[i])
                     }
                     console.log(y)
@@ -160,77 +155,110 @@ const Displayflow = (props) => {
             if (i == arr.length) {
                 console.log("correct")
                 setFlag(true)
-                let w = minutes*60+seconds+penal
+                let w = minutes * 60 + seconds + penal
                 let u = data.leaderboard
                 let r = JSON.parse(localStorage.getItem('jwt')).user["name"]
-                u.push({name:r,time:w})
+                u.push({ name: r, time: w })
                 let o = {
-                    leaderboard:u
+                    leaderboard: u
                 }
-                sendTimeData(props.match.params.id,o).then(data => {
+                sendTimeData(props.match.params.id, o).then(data => {
                     console.log(data)
-                    
-                    console.log(time>w)
-                    if(time>w){
+
+                    console.log(time > w)
+                    if (time > w) {
                         setTime(w)
                         let g = {
-                            best_time:w,
-                            best_name:JSON.parse(localStorage.getItem('jwt')).user["name"]
+                            best_time: w,
+                            best_name: JSON.parse(localStorage.getItem('jwt')).user["name"]
                         }
-                        sendTimeData(props.match.params.id,g).then(data => {
+                        sendTimeData(props.match.params.id, g).then(data => {
                             console.log(data)
                         })
-                    }      
+                    }
                 })
             }
         }
 
     };
-    const buttonHandler = () =>{
+    const buttonHandler = () => {
         setButton(true)
         alert("You will be penalized")
         console.log(minutes)
         setPenal(10)
     }
-    const leaderHandler = () =>{
+    const leaderHandler = () => {
         setLeader(data.leaderboard)
     }
-    
-    return (
-        <div style ={{backgroundColor: 'rgba(5, 0, 255, 0.4)'}}>
-            <Menu></Menu>
-            <div style={{
-                textAlign: 'center',
-                color: "rgb(255, 2, 124)",
-                position: 'relative',
-                top: '50px',
-                fontFamily: 'Raleway ,sans-serif', 
-                fontSize: '45px',
-                fontWeight: '600', 
-                lineHeight: '72px',  
-                textTransform: 'uppercase',
-            }}
-            >
-                Best Score: {data && data.best_time}  By: {data && data.best_name}
-            </div>
-      <h1 style={{
-          marginLeft:'85%', 
+
+    return (<div>
+        <Menu></Menu>
+        <div style={{ backgroundColor: 'rgba(5,0,255,0.4)' 
+                // backgroundImage: 'url("https://unsplash.com/photos/8ob67fX0mk0")',
         }}>
-        <div style={{
-                backgroundColor: 'rgba(255, 2, 124, 1)',
+
+            {/* <h3 style={{ color: 'darkBlue' }}>
+                Best Score: {data && data.best_time}<br></br>
+                By:{data && data.best_name}
+            </h3> */}
+
+
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+
+
+            <div style={{ display: 'flex' }}>
+                {/* <button style={{ marginLeft: '150px', backgroundColor: 'black', color: 'white', paddingLeft: '20px', width: '300px', height: '60px', borderRadius: '40px' }} onClick={leaderHandler}>Show Leaderboard</button>
+                {
+                    JSON.stringify(leader)} */}
+                <br></br><br></br>
+
+                {!button &&
+                    <div style={{             
+                        appearance: 'button',
+                        backgroundColor: '#131D5A',
+                        backgroundImage: 'none',
+                        border: '1px solicd #000',
+                        borderRadius: '4px',
+                        boxShadow: '#fff 4px 4px 0 0,#000 4px 4px 0 1px',
+                        boxSizing: 'border-box',
+                        color: '#fff',
+                        cursor: 'pointer', 
+                        fontSize: '20px',
+                        margin: '0 260px 10px 13%',
+                        fontWeight: '650',
+                        lineHeight: '20px',
+                        overflow: 'visible',
+                        padding: '20px 30px',
+                        textAlign: 'center',
+                        textTransform: 'none',
+                        touchAction: 'manipulation',
+                        userSelect: 'none',
+                        webkitUserSelect: 'none',
+                        verticalAlign: 'middle',
+                        whiteSpace: 'nowrap', 
+            }} onClick={buttonHandler}>
+                Show Hint</div>
+            }
+
+                {button && <p style={{ backgroundColor: 'black', color: 'white', marginLeft: '13%', width: '300px', height: '60px', borderRadius: '40px', paddingTop: '10px', paddingLeft: '6px', marginRight: '150px' }}>{data.hint}</p>}
+
+                <h1 style={{ backgroundColor: '#131D5A',
                 backgroundImage: 'none',
                 border: '1px solid #000',
                 borderRadius: '4px',
                 boxShadow: '#fff 4px 4px 0 0,#000 4px 4px 0 1px',
                 boxSizing: 'border-box',
-                color: '#000',
+                color: '#fff',
                 cursor: 'pointer',
                 display: 'inline-block',
                 fontFamily: 'ITCAvantGardeStd-Bk,Arial,sans-serif',
                 fontSize: '45px',
                 fontWeight: '400',
                 lineHeight: '20px',
-                margin: '0 5px 10px 0',
+                margin: '0 5px 10px 40px',
                 overflow: 'visible',
                 padding: '12px 40px',
                 textAlign: 'center',
@@ -239,98 +267,102 @@ const Displayflow = (props) => {
                 userSelect: 'none',
                 webkitUserSelect: 'none',
                 verticalAlign: 'middle',
-                whiteSpace: 'nowrap',
-            }}
-        >
-          <span>
-            {minutes}
-          </span>
-          :
-          <span>
-            {seconds}
-          </span>
-        </div>
-      </h1>
-      
-      <div style={{         
-            top: '900px',  
-            appearance: 'button',
-            backgroundColor: 'rgba(255, 2, 124, 1)',
-            backgroundImage: 'none',
-            border: '1px solid #000',
-            borderRadius: '4px',
-            boxShadow: '#fff 4px 4px 0 0,#000 4px 4px 0 1px',
-            boxSizing: 'border-box',
-            color: '#000',
-            cursor: 'pointer',
-            display: 'inline-block',
-            fontFamily: 'ITCAvantGardeStd-Bk,Arial,sans-serif',
-            fontSize: '20px',
-            fontWeight: '650',
-            lineHeight: '20px',
-            margin: '0 5px 10px 50px',
-            overflow: 'visible',
-            padding: '12px 40px',
-            textAlign: 'center',
-            textTransform: 'none',
-            touchAction: 'manipulation',
-            userSelect: 'none',
-            webkitUserSelect: 'none',
-            verticalAlign: 'middle',
-            whiteSpace: 'nowrap',
-        }} onClick={leaderHandler}>
-        Show Leaderboard
-      </div>
-      {
-         JSON.stringify(leader) }
-      <br></br><br></br>
-      <div style={{            
-            appearance: 'button',
-            backgroundColor: 'rgba(255, 2, 124, 1)',
-            backgroundImage: 'none',
-            border: '1px solicd #000',
-            borderRadius: '4px',
-            boxShadow: '#fff 4px 4px 0 0,#000 4px 4px 0 1px',
-            boxSizing: 'border-box',
-            color: '#000',
-            cursor: 'pointer',
-            display: 'inline-block',
-            fontSize: '20px',
-            fontWeight: '650',
-            lineHeight: '20px',
-            margin: '0 5px 10px 50px',
-            overflow: 'visible',
-            padding: '12px 40px',
-            textAlign: 'center',
-            textTransform: 'none',
-            touchAction: 'manipulation',
-            userSelect: 'none',
-            webkitUserSelect: 'none',
-            verticalAlign: 'middle',
-            whiteSpace: 'nowrap',
-        }} onClick={buttonHandler}>
-      Show Hint
-      </div>
-      <br/>
-      <div style = {{
-            color: "#008080",
-            fontFamily: 'Raleway ,sans-serif', 
-            fontSize: '25px',
-            fontWeight: '200', 
-            lineHeight: '72px', 
-            margin: '0 3px 0', 
-            textTransform: 'uppercase',
-            marginLeft: '50px', 
-      }}>
-      {button && data.hint}
-      </div>
+                whiteSpace: 'nowrap', }}>
+                    <span>{minutes}</span>:<span>{seconds}</span>
+                </h1>
+                {!clicked && <div style={{ appearance: 'button',
+                backgroundColor: '#131D5A',
+                backgroundImage: 'none',
+                border: '1px solid #000',
+                borderRadius: '4px',
+                boxShadow: '#fff 4px 4px 0 0,#000 4px 4px 0 1px',
+                boxSizing: 'border-box',
+                color: '#fff',
+                cursor: 'pointer',
+                display: 'inline-block',
+                fontFamily: 'ITCAvantGardeStd-Bk,Arial,sans-serif',
+                fontSize: '20px',
+                fontWeight: '650',
+                lineHeight: '20px',
+                margin: '0px 5px 10px 320px',
+                overflow: 'visible',
+                padding: '12px 40px',
+                textAlign: 'center',
+                textTransform: 'none',
+                touchAction: 'manipulation',
+                userSelect: 'none',
+                webkitUserSelect: 'none',
+                verticalAlign: 'middle',
+                whiteSpace: 'nowrap', }} type="button" onClick={saveChangesHandler}>
+                    Submit
+                </div>
+                }
+                {
+                    flag && <div style={{ appearance: 'button',
+                backgroundColor: 'green',
+                backgroundImage: 'none',
+                border: '1px solid #000',
+                borderRadius: '4px',
+                boxShadow: '#fff 4px 4px 0 0,#000 4px 4px 0 1px',
+                boxSizing: 'border-box',
+                color: '#fff',
+                cursor: 'pointer',
+                display: 'inline-block',
+                fontFamily: 'ITCAvantGardeStd-Bk,Arial,sans-serif',
+                fontSize: '20px',
+                fontWeight: '650',
+                lineHeight: '20px',
+                margin: '0px 5px 10px 290px',
+                overflow: 'visible',
+                padding: '20px 40px',
+                textAlign: 'center',
+                textTransform: 'none',
+                touchAction: 'manipulation',
+                userSelect: 'none',
+                webkitUserSelect: 'none',
+                verticalAlign: 'middle',
+                whiteSpace: 'nowrap', }}>
+                      Correct!🚀
+                    </div>
+                }
+                {
+
+                    !flag && clicked && <div style={{ appearance: 'button',
+                backgroundColor: 'red',
+                backgroundImage: 'none',
+                border: '1px solid #000',
+                borderRadius: '4px',
+                boxShadow: '#fff 4px 4px 0 0,#000 4px 4px 0 1px',
+                boxSizing: 'border-box',
+                color: '#fff',
+                cursor: 'pointer',
+                display: 'inline-block',
+                fontFamily: 'ITCAvantGardeStd-Bk,Arial,sans-serif',
+                fontSize: '20px',
+                fontWeight: '650',
+                lineHeight: '20px',
+                margin: '0px 5px 10px 290px',
+                overflow: 'visible',
+                padding: '20px 40px',
+                textAlign: 'center',
+                textTransform: 'none',
+                touchAction: 'manipulation',
+                userSelect: 'none',
+                webkitUserSelect: 'none',
+                verticalAlign: 'middle',
+                whiteSpace: 'nowrap',  }}>
+                Wrong one🙁
+                </div>
+                }
+
+            </div>
             <div
                 style={{
-                    height: "90vh",
+                    height: "86vh",
                     width: "75vw",
                     border: "1px solid black",
                     marginLeft: "12.5vw",
-                    backgroundColor: 'rgba(252, 221, 236, 0.4)',/* -> Change color of playground*/
+                    backgroundColor: 'rgba(19, 29, 90, 0.8)'
                 }}
             >
 
@@ -345,7 +377,7 @@ const Displayflow = (props) => {
                     connectionLineStyle={{ stroke: "black", strokeWidth: 2 }}
                     onLoad={onLoad}
                 >
-                    <Background variant="dots" gap={15} size={2} color="rgba(0, 0, 0, 0.3)" />
+                    {/* <Background variant="dots" gap={15} size={2} color="#c8c8c8" /> */}
 
                     <MiniMap
                         nodeColor={(node) => {
@@ -366,49 +398,14 @@ const Displayflow = (props) => {
 
                     <Controls />
                 </ReactFlow>
-            <div style={{ backgroundColor: 'rgba(5, 0, 255, 0.4)'}}>
-            <div style={{            
-                appearance: 'button',
-                marginLeft: '50px', 
-                backgroundColor: '#000',
-                backgroundImage: 'none',
-                border: '1px solid #000',
-                borderRadius: '4px',
-                boxShadow: '#fff 4px 4px 0 0,#000 4px 4px 0 1px',
-                boxSizing: 'border-box',
-                color: '#fff',
-                cursor: 'pointer',
-                display: 'inline-block',
-                fontFamily: 'ITCAvantGardeStd-Bk,Arial,sans-serif',
-                fontSize: '14px',
-                fontWeight: '400',
-                lineHeight: '20px',
-                margin: '0 5px 10px 0',
-                overflow: 'visible',
-                padding: '12px 40px',
-                textAlign: 'center',
-                textTransform: 'none',
-                touchAction: 'manipulation',
-                userSelect: 'none',
-                webkitUserSelect: 'none',
-                verticalAlign: 'middle',
-                whiteSpace: 'nowrap',
-            }} onClick={saveChangesHandler}>
-                Save changes
+
+
+
+
+
+
             </div>
-            {
-                flag && <div>
-                        correct answer
-                    </div>
-            }
-            {
-                !flag && clicked && <div>
-                    wrong answer
-                </div>
-            }
-            </div>
-            </div>
-            </div>
+        </div></div>
     );
 };
 

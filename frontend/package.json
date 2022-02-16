@@ -14,10 +14,9 @@
     "react-flow": "^1.0.3",
     "react-flow-renderer": "^9.7.3",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.1",
+    "react-scripts": "^4.0.3",
     "react-timer": "^1.1.1",
     "react-timer-hook": "^3.0.5",
-    "reactjs-popup": "^2.0.5",
     "redux": "^4.1.2",
     "web-vitals": "^0.2.4"
   },

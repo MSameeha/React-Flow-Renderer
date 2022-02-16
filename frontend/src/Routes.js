@@ -7,6 +7,8 @@ const Displayflow = lazy(() => import('./user/Displayflow'));
 const Home = lazy(() => import('./core/Home'));
 const NotFound = lazy(() => import('./core/Notfound'));
 const PrivateRoute = lazy(() => import('./auth/PrivateRoute'));
+const Leaderboard = lazy(() => import('./user/Leaderboard'));
+const ShowLeader = lazy(() => import('./user/ShowLeader'));
 const Routes = () => {
     return (
         <BrowserRouter>
@@ -18,6 +20,8 @@ const Routes = () => {
                     <Route path="/signin" exact component={Signin}></Route>
                     <Route path="/signup" exact component={Signup}></Route>
                     <PrivateRoute path="/display/:id" exact component={Displayflow}></PrivateRoute>
+                    <Route path="/leaderboard" exact component={Leaderboard}></Route>
+                    <Route path="/leaderboard/:id" exact component={ShowLeader}></Route>
                     <Route component={NotFound} ></Route>
                 </Switch>
             </Suspense>

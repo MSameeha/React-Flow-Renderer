@@ -68,7 +68,7 @@ const ReactFlowRenderer = (props) => {
     newNode.data = { ...newNode.data, id: `${newNode.id}` };
 
     const newNode1 = {
-      id: `${Date.now()+1}`,
+      id: `${Date.now() + 1}`,
       data: { label: `Yes` },
       type: "rectangle",
       position: {
@@ -79,7 +79,7 @@ const ReactFlowRenderer = (props) => {
     newNode1.data = { ...newNode1.data, id: `${newNode1.id}` };
 
     const newNode2 = {
-      id: `${Date.now()+2}`,
+      id: `${Date.now() + 2}`,
       data: { label: `No` },
       type: "rectangle",
       position: {
@@ -91,26 +91,26 @@ const ReactFlowRenderer = (props) => {
 
 
     const edge1 = {
-        id: `${Date.now()+3}`,
-        source: `${newNode.id}`,
-        // target: '2',
-        sourceHandle: `${newNode.id}.bottom`,
-        target: `${newNode1.id}`,
-        targetHandle: `${newNode1.id}.top`,
-        flg:1
+      id: `${Date.now() + 3}`,
+      source: `${newNode.id}`,
+      // target: '2',
+      sourceHandle: `${newNode.id}.bottom`,
+      target: `${newNode1.id}`,
+      targetHandle: `${newNode1.id}.top`,
+      flg: 1
     }
 
     const edge2 = {
-      id: `${Date.now()+4}`,
+      id: `${Date.now() + 4}`,
       source: `${newNode.id}`,
       sourceHandle: `${newNode.id}.top`,
       target: `${newNode2.id}`,
       targetHandle: `${newNode2.id}.top`,
-      flg:1
+      flg: 1
     }
 
     setElements((prev) => {
-      return [...prev, newNode,newNode1,newNode2,edge1,edge2];
+      return [...prev, newNode, newNode1, newNode2, edge1, edge2];
     });
     console.log(elements)
     setName("");
@@ -214,7 +214,7 @@ const ReactFlowRenderer = (props) => {
     x["nodes"] = instance.getElements()
     x["name"] = flowname
     x["category"] = catname
-    x["hint"]=hint
+    x["hint"] = hint
     saveFlow(JSON.stringify(x))
       .then(data => {
         if (data.error) {
@@ -222,12 +222,14 @@ const ReactFlowRenderer = (props) => {
         } else {
           console.log(data)
           // props.history.push('/')
+          alert("changes saved")
         }
       });
   };
 
   return (
     <div><div>
+      <h1>Create Flow Chart</h1>
       <label>Enter name of your flowchart :</label>
       <input
         value={flowname}
@@ -236,14 +238,13 @@ const ReactFlowRenderer = (props) => {
         placeholder="flowchart name"
       />
       <br></br>
-      <br></br>
       <label>Enter the category  : </label>
       <input
         value={catname}
         onChange={(e) => setcatName(e.target.value)}
         type="text"
         placeholder="category"
-      /><br></br><br></br>
+      /><br></br>
       <label>Enter hint  : </label>
       <input
         value={hint}
@@ -254,13 +255,13 @@ const ReactFlowRenderer = (props) => {
 
     </div>
       <br></br>
-      <br></br>
       <div
         style={{
-          height: "75vh",
-          width: "75vw",
+          height: "87vh",
+          width: "87vw",
           border: "1px solid black",
-          marginLeft: "12.5vw"
+          marginLeft: "6vw",
+          backgroundColor: '#131D5A'
         }}
       >
 
@@ -277,7 +278,7 @@ const ReactFlowRenderer = (props) => {
           onDoubleClick={clickHandler}
           onLoad={onLoad}
         >
-          <Background variant="dots" gap={15} size={2} color="#c8c8c8" />
+          {/* <Background variant="dots" gap={15} size={2} color="#c8c8c8" /> */}
 
           <MiniMap
             nodeColor={(node) => {

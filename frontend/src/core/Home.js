@@ -1,20 +1,22 @@
 import { isAuthenticated } from '../auth'
-import { getCategories,getFlows} from "../user/apiHelper";
-import { useEffect,useState } from "react";
+import { getCategories, getFlows } from "../user/apiHelper";
+import { useEffect, useState } from "react";
 import ReactFlowRenderer from '../react-flow-renderer';
 import Showflow from '../user/Showflow'
 import Menu from "./Menu";
 import { Redirect } from 'react-router-dom';
+import './Home.css';
 const Home = () => {
     const [categories, setCategories] = useState(false)
     const [flowcharts, setFlowcharts] = useState(false)
     const [currentFlowChart, setCurrentFlowChart] = useState([])
+    const [flag, setFlag] = useState(false)
     const init = () => {
         getCategories().then(data => {
             if (data.error) {
                 console.log("error occured")
             } else {
-                
+
                 let mySet1 = new Set()
                 data.map((d, i) => {
                     // console.log(d.category)
@@ -35,11 +37,12 @@ const Home = () => {
     };
     const handleClick = (e) => {
         setCurrentFlowChart([])
+        setFlag(true)
         // console.log(e.target.value)
         let x = []
         flowcharts.map((fc, i) => {
             // console.log(fc.category === e.target.value)
-            if(fc.category === e.target.value){
+            if (fc.category === e.target.value) {
                 x.push(fc)
             }
         })
@@ -50,51 +53,41 @@ const Home = () => {
     useEffect(() => {
         init();
     }, []);
+
+
     return (
         <div>
-        <Menu></Menu>
-        <div>
-            
-            <div >
+            <div style={{ backgroundColor: 'rgba(5, 0, 255, 0.65)', height: '1000px' }}>
+                <Menu></Menu>
                 {
                     !isAuthenticated() && <Redirect to="/signin"></Redirect>
                 }
-            {   isAuthenticated() && isAuthenticated().user.role === 0 &&
+                {/*<div>*/}
+                { !flag && isAuthenticated() && isAuthenticated().user.role === 0 &&
                     categories && categories.map((fc, i) => {
-                        return (<div key={i}>
-                            <button key={i} value={fc} onClick={(e) => handleClick(e)} >
-                                {fc}
-                            </button>
-                            <br></br>
-                            <br></br>
-        
-                        </div>)
-                    })
-            }
-            </div>
-            {/* <Dashboard flow={currentFlowChart}></Dashboard> */}
-            {isAuthenticated() && isAuthenticated().user.role === 1 &&
-                // < Layout
-                //     title="Add a flowchart"
-                //     description=""
-                //     className="container col-md-8 offset-md-2"
-                // >
-                    <ReactFlowRenderer />
-
-                // </Layout >
-
-
-            }
-              {isAuthenticated() && isAuthenticated().user.role === 0 && 
-                <div> 
-                    {/* {JSON.stringify(props.flow)} */}
+                        return (
+                            <div key={i}>
+                                <div className="cards-list">
+                                    <div class="card 3">
+                                        <div class="card_image">
+                                            <img style ={{backgroundColor: 'pink'}}src="https://media4.giphy.com/media/7FrOU9tPbgAZtxV5mb/200w.webp?cid=ecf05e47ziso8zl7yag6mibkrhsz3j5fwbqk3nixrvtjomp9&rid=200w.webp&ct=g" />
+                                        </div>
+                                        <div class="card_title">
+                                            <button type="submit" key={i} value={fc} onClick={(e) => handleClick(e)} >
+                                                <text>🚀</text> {fc}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    )})}
+                {   isAuthenticated() && isAuthenticated().user.role === 1 && <ReactFlowRenderer /> }
+                { flag && isAuthenticated() && isAuthenticated().user.role === 0 &&
                     <Showflow flow={currentFlowChart}></Showflow>
-                    {/* <Home></Home> */}
-                
-                 </div>
-              }
-        </div>
+                }
             </div>
+        </div>
     )
 }
+
 export default Home;

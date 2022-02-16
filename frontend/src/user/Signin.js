@@ -80,14 +80,22 @@ const Signin = () => {
         }
     }
 
-    return (<div ><Menu>  </Menu>
+    return (<div style={{
+
+        // backgroundColor: 'rgba(5, 0, 255, 0.4)',
+        // backgroundColor: 'rgba(92, 3, 151, 0.7)',
+        backgroundColor: 'rgba(5, 0, 255, 0.65)',
+
+    }}><Menu >  </Menu>
         <div style={{
             width: '100%',
             height: '100%',
-            backgroundColor: 'rgba(5, 0, 255, 0.4)',
+            // backgroundColor: 'rgba(5, 0, 255, 0.4)',
             display: 'flex',
             flexWrap: 'wrap'
         }}>
+
+
             <img style={{
                 marginTop: '10%', marginLeft: '15%', marginRight: '12%', borderRadius: '290px'
             }} height="200px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7Mvq2MGMEzWXPTUfqbqgtlUazwyoOYpB7lA&usqp=CAU"></img>
@@ -101,7 +109,7 @@ const Signin = () => {
                 {redirectUser()}
             </div>
         </div>
-    </div>
+    </div >
     )
 }
 

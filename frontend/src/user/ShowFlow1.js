@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { getFlows, getFlow } from "./apiHelper";
 import { withRouter } from "react-router-dom";
-const Showflow = (props) => {
+const Showflow1 = (props) => {
     const [flowcharts, setFlowcharts] = useState(false)
     const [currentFlowChart, setCurrentFlowChart] = useState(false)
     const init = () => {
@@ -27,7 +27,7 @@ const Showflow = (props) => {
             } else {
                 setCurrentFlowChart(data)
                 console.log(currentFlowChart)
-                props.history.push(`/display/${data._id}`)
+                props.history.push(`/leaderboard/${data._id}`)
             }
             //  console.log(e.target.value)
             //console.log("clicked ")
@@ -37,7 +37,7 @@ const Showflow = (props) => {
 
 
     return (
-        <div style ={{backgroundColor: 'rgba(5, 0, 255, 0.4)'}}>
+        <div>
             <br></br>
             <br></br>
             <h2 style={{ marginLeft: '20%', color: 'black' }}>Select a Flowchart</h2>
@@ -49,26 +49,21 @@ const Showflow = (props) => {
                 {
                     props.flow && props.flow.map((fc, i) => {
 
-                        return (
-                            <div key={i}>
-                                <div className="cards-list">
-                                    <div class="card 3">
-                                        <div class="card_image">
-                                            <img  style ={{backgroundColor: '#E4BCFE'}}src="https://media1.giphy.com/media/veOuvpRopgi8w0qZL9/giphy.gif?cid=790b76110cad0a93128f073275dc8536ddec9e7d86993d08&rid=giphy.gif&ct=s  " />
-                                        </div>
-                                        <div class="card_title">
-                                            <button type="submit" key={i} value={fc} onClick={(e) => handleClick(e)} >
-                                                <text>🚀</text> {fc.name}
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        )})
+                        return (<div key={i}>
+
+                            <button style={{ backgroundColor: '#131D5A', color: 'white', padding: '10px', textAlign: 'center', marginLeft: '80px', fontSize: '30px', height: '100px', borderRadius: '10px' }} key={i} value={fc._id} onClick={(e) => handleClick(e)}>
+                                {fc.name}
+
+                            </button>
+                            <br></br>
+                            <br></br>
+
+                        </div>)
+                    })
                 }
                 {/* {currentFlowChart && JSON.stringify(currentFlowChart)} */}
             </div>
         </div >
     )
 }
-export default withRouter(Showflow)
+export default withRouter(Showflow1)
